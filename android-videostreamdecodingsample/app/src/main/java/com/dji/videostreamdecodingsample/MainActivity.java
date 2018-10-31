@@ -144,7 +144,7 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
 
     @Override
     protected void onDestroy() {
-        nativeFinalize();
+//        nativeFinalize();
         if (mCodecManager != null) {
             mCodecManager.cleanSurface();
             mCodecManager.destroyCodec();
