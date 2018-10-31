@@ -32,6 +32,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Locale;
+import java.util.Arrays;
 
 import dji.common.product.Model;
 import dji.sdk.base.BaseProduct;
@@ -40,7 +42,20 @@ import dji.sdk.camera.VideoFeeder;
 import dji.sdk.codec.DJICodecManager;
 import java.nio.ByteBuffer;
 
+import org.freedesktop.gstreamer.GStreamer;
+
 public class MainActivity extends Activity implements DJICodecManager.YuvDataCallback {
+    static{
+        System.loadLibrary("gstreamer_android");
+        System.loadLibrary("tutorial-2");
+    }
+    private native void nativeInit();     // Initialize native code, build pipeline, etc
+    private native void nativeFinalize(); // Destroy pipeline and shutdown native code
+//    private native void nativePlay();     // Set pipeline to PLAYING
+//    private native void nativePause();    // Set pipeline to PAUSED
+//    private static native boolean nativeClassInit(); // Initialize native class: cache Method IDs for callbacks
+    private native void sendData(byte[] data);
+
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int MSG_WHAT_SHOW_TOAST = 0;
     private static final int MSG_WHAT_UPDATE_TITLE = 1;
@@ -80,6 +95,9 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
     private int videoViewWidth;
     private int videoViewHeight;
     private int count;
+    private FileOutputStream dumpStream;
+    private File djiVideoFolder;
+    private int h264FragmentCount;
 
     @Override
     protected void onResume() {
@@ -126,6 +144,7 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
 
     @Override
     protected void onDestroy() {
+        nativeFinalize();
         if (mCodecManager != null) {
             mCodecManager.cleanSurface();
             mCodecManager.destroyCodec();
@@ -139,6 +158,22 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
 
         setContentView(R.layout.activity_main);
         initUi();
+
+        // Initialize GStreamer and warn if it fails
+        try {
+            GStreamer.init(this);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
+        nativeInit();
+
+        // mkdir /sdcard/hexl
+        File sdCard = Environment.getExternalStorageDirectory();
+        djiVideoFolder = new File (sdCard.getAbsolutePath() + "/hexl");
+        djiVideoFolder.mkdirs();
     }
 
     private void showToast(String s) {
@@ -220,6 +255,23 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
                     Log.d(TAG, "camera recv video data size: " + size);
                     lastupdate = System.currentTimeMillis();
                 }
+                byte[] realBuffer = Arrays.copyOfRange(videoBuffer, 0, size);
+                sendData(realBuffer);
+//                if (h264FragmentCount < 100000) {
+//                    try {
+//                        File file = new File(djiVideoFolder, String.format(Locale.US, "%05d", h264FragmentCount++) + ".h264");
+//                        FileOutputStream f = new FileOutputStream(file, false);
+//                        f.write(realBuffer);
+//                        Log.w(TAG, "write " + h264FragmentCount + " chunk finished: " + size + " bytes");
+//                    } catch (IOException ioExp) {
+//                    }
+//                }
+//                try{
+//                    File file = new File(djiFolder, "dji_h264_test.h264");
+//                    dumpStream = new FileOutputStream(file, true);
+//                    dumpStream.write(realBuffer);
+//                }catch (IOException ioExp){
+//                }
                 switch (demoType) {
                     case USE_SURFACE_VIEW:
                         if (mCodecManager != null) {

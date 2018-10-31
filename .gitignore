@@ -1,3 +1,6 @@
+build
+*.so
+
 # built application files
 *.apk
 *.ap_
