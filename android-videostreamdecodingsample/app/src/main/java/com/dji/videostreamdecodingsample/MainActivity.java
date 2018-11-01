@@ -247,8 +247,8 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
                     Log.d(TAG, "camera recv video data size: " + size);
                     lastupdate = System.currentTimeMillis();
                 }
-                byte[] realBuffer = Arrays.copyOfRange(videoBuffer, 0, size);
-                NativeRtspServer.getInstance().injectBuffer(realBuffer);
+//                byte[] realBuffer = Arrays.copyOfRange(videoBuffer, 0, size);
+                NativeRtspServer.getInstance().injectBuffer(videoBuffer, size);
 //                if (h264FragmentCount < 100000) {
 //                    try {
 //                        File file = new File(djiVideoFolder, String.format(Locale.US, "%05d", h264FragmentCount++) + ".h264");

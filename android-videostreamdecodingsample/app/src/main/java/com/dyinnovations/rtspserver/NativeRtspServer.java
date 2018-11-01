@@ -31,7 +31,7 @@ public class NativeRtspServer {
      * @param size
      * @return
      */
-    public static native void injectBuffer(byte[] data);
+    public static native void injectBuffer(byte[] buf, int size);
 
     static{
         System.loadLibrary("rtsp_server");
