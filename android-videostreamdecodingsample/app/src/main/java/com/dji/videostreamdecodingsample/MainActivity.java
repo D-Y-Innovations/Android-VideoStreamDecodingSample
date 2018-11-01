@@ -43,19 +43,12 @@ import dji.sdk.codec.DJICodecManager;
 import java.nio.ByteBuffer;
 
 import org.freedesktop.gstreamer.GStreamer;
+import com.dyinnovations.rtspserver.NativeRtspServer;
 
 public class MainActivity extends Activity implements DJICodecManager.YuvDataCallback {
     static{
         System.loadLibrary("gstreamer_android");
-        System.loadLibrary("tutorial-2");
     }
-    private native void nativeInit();     // Initialize native code, build pipeline, etc
-    private native void nativeFinalize(); // Destroy pipeline and shutdown native code
-//    private native void nativePlay();     // Set pipeline to PLAYING
-//    private native void nativePause();    // Set pipeline to PAUSED
-//    private static native boolean nativeClassInit(); // Initialize native class: cache Method IDs for callbacks
-    private native void sendData(byte[] data);
-
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int MSG_WHAT_SHOW_TOAST = 0;
     private static final int MSG_WHAT_UPDATE_TITLE = 1;
@@ -144,7 +137,6 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
 
     @Override
     protected void onDestroy() {
-//        nativeFinalize();
         if (mCodecManager != null) {
             mCodecManager.cleanSurface();
             mCodecManager.destroyCodec();
@@ -168,7 +160,7 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
             finish();
             return;
         }
-        nativeInit();
+        NativeRtspServer.getInstance().init();
 
         // mkdir /sdcard/hexl
         File sdCard = Environment.getExternalStorageDirectory();
@@ -256,7 +248,7 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
                     lastupdate = System.currentTimeMillis();
                 }
                 byte[] realBuffer = Arrays.copyOfRange(videoBuffer, 0, size);
-                sendData(realBuffer);
+                NativeRtspServer.getInstance().injectBuffer(realBuffer);
 //                if (h264FragmentCount < 100000) {
 //                    try {
 //                        File file = new File(djiVideoFolder, String.format(Locale.US, "%05d", h264FragmentCount++) + ".h264");
