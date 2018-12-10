@@ -1686,19 +1686,19 @@ public final class R {
         public static final int offline_map_upgrade_text = 0x7f0e0220;
         public static final int offline_map_waitting_text = 0x7f0e0221;
         public static final int scan_qr_bar_tip = 0x7f0e0223;
-        public static final int sdk_wifi_permission_description = 0x7f0e0224;
-        public static final int sdk_wifi_permission_label = 0x7f0e0225;
-        public static final int search_menu_title = 0x7f0e0226;
-        public static final int setting_ui_flyfrb_unlock_refresh_empty = 0x7f0e0227;
-        public static final int setting_ui_flyfrb_unlock_refresh_fail = 0x7f0e0228;
-        public static final int setting_ui_flyfrb_unlock_refresh_success = 0x7f0e0229;
-        public static final int status_bar_notification_info_overflow = 0x7f0e022a;
-        public static final int v2_nfz_unlock_geo_type = 0x7f0e022c;
-        public static final int v2_nfz_unlock_white_list_type = 0x7f0e022d;
-        public static final int zxing_app_name = 0x7f0e022e;
-        public static final int zxing_button_ok = 0x7f0e022f;
-        public static final int zxing_msg_camera_framework_bug = 0x7f0e0230;
-        public static final int zxing_msg_default_status = 0x7f0e0231;
+        public static final int sdk_wifi_permission_description = 0x7f0e0225;
+        public static final int sdk_wifi_permission_label = 0x7f0e0226;
+        public static final int search_menu_title = 0x7f0e0227;
+        public static final int setting_ui_flyfrb_unlock_refresh_empty = 0x7f0e0228;
+        public static final int setting_ui_flyfrb_unlock_refresh_fail = 0x7f0e0229;
+        public static final int setting_ui_flyfrb_unlock_refresh_success = 0x7f0e022a;
+        public static final int status_bar_notification_info_overflow = 0x7f0e022b;
+        public static final int v2_nfz_unlock_geo_type = 0x7f0e022d;
+        public static final int v2_nfz_unlock_white_list_type = 0x7f0e022e;
+        public static final int zxing_app_name = 0x7f0e022f;
+        public static final int zxing_button_ok = 0x7f0e0230;
+        public static final int zxing_msg_camera_framework_bug = 0x7f0e0231;
+        public static final int zxing_msg_default_status = 0x7f0e0232;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat = 0x7f0f0000;

@@ -147,8 +147,8 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        LogcatHelper.getInstance(this).start();//Log保存到本地
         initUi();
 
         // Initialize GStreamer and warn if it fails

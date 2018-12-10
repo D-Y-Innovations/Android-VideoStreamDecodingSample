@@ -1512,6 +1512,7 @@
     <string name="offline_map_waitting_text">Please wait.</string>
     <string name="product_information">Product Information</string>
     <string name="scan_qr_bar_tip">Place the QR code inside the box to scan successfully.</string>
+    <string name="sdk_version">DJI SDK Version: %1$s</string>
     <string name="sdk_wifi_permission_description">This permission should only be granted to DJI Go App.</string>
     <string name="sdk_wifi_permission_label">Stop Wifi Link permission inside DJI Mobile SDK</string>
     <string name="search_menu_title">Search</string>

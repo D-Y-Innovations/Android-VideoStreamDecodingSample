@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/zlinoliver/Documents/DJI-SDK-Github/Android-Tutorial-Projects/Android-VideoStreamDecodingSample/android-videostreamdecodingsample/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rHK/values-zh-rHK.xml",
+            "outputFile": "D:\\GitWorkSpace\\xiaohe_rtsp\\Android-VideoStreamDecodingSample\\android-videostreamdecodingsample\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rHK\\values-zh-rHK.xml",
             "map": [
                 {
-                    "source": "/Users/zlinoliver/.gradle/caches/transforms-1/files-1.1/dji-sdk-4.8.1.aar/7617b11bf10383b978ae2fdc6343832e/res/values-zh-rHK/values-zh-rHK.xml",
+                    "source": "D:\\androidstudio\\.gradle\\caches\\transforms-1\\files-1.1\\dji-sdk-4.8.1.aar\\6d54670d5718fd58ebb1ef43c834df36\\res\\values-zh-rHK\\values-zh-rHK.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/zlinoliver/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.0.aar/3bb28c61382c339016ff2ab15855ae15/res/values-zh-rHK/values-zh-rHK.xml",
+                    "source": "D:\\androidstudio\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.0.aar\\6c0a6124a571f71c23902b6f5e69d467\\res\\values-zh-rHK\\values-zh-rHK.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/zlinoliver/.gradle/caches/transforms-1/files-1.1/support-compat-27.0.0.aar/06c576bef64e0d472cc3a26bf2a020bc/res/values-zh-rHK/values-zh-rHK.xml",
+                    "source": "D:\\androidstudio\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.0.aar\\37b0d5ccfcf08a624c4d0c0242979c1b\\res\\values-zh-rHK\\values-zh-rHK.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
