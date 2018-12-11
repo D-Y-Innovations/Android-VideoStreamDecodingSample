@@ -1,3 +1,0 @@
-# Referenced at D:\GitWorkSpace\xiaohe_rtsp\Android-VideoStreamDecodingSample\android-videostreamdecodingsample\app\build\intermediates\manifests\full\debug\AndroidManifest.xml:56
--keep class com.dji.videostreamdecodingsample.VideoDecodingApplication { <init>(...); }
-
