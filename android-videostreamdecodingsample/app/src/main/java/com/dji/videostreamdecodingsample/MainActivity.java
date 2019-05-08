@@ -207,6 +207,13 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
         Log.d(TAG, "notifyStatusChange: " + (product == null ? "Disconnect" : (product.getModel() == null ? "null model" : product.getModel().name())));
         if (product != null && product.isConnected() && product.getModel() != null) {
             updateTitle(product.getModel().name() + " Connected " + demoType.name());
+
+            VideoFeeder.getInstance().addPhysicalSourceListener(new VideoFeeder.PhysicalSourceListener() {
+                @Override
+                public void onChange(VideoFeeder.VideoFeed videoFeed, VideoFeeder.PhysicalSource physicalSource) {
+                    showToast("VideoFeeder.PhysicalSource = " + physicalSource.toString());
+                }
+            });
         } else {
             updateTitle("Disconnected");
         }
@@ -216,8 +223,9 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
 
             @Override
             public void onReceive(byte[] videoBuffer, int size) {
-                if (System.currentTimeMillis() - lastupdate > 1000) {
+                if (System.currentTimeMillis() - lastupdate > 5 * 1000) {
                     Log.d(TAG, "camera recv video data size: " + size);
+                    showToast("camera recv video data size: " + size);
                     lastupdate = System.currentTimeMillis();
                 }
                 switch (demoType) {
@@ -250,14 +258,15 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
         } else {
             if (!product.getModel().equals(Model.UNKNOWN_AIRCRAFT)) {
                 mCamera = product.getCamera();
-                mCamera.setMode(SettingsDefinitions.CameraMode.SHOOT_PHOTO, new CommonCallbacks.CompletionCallback() {
-                    @Override
-                    public void onResult(DJIError djiError) {
-                        if (djiError != null) {
-                            showToast("can't change mode of camera, error:"+djiError.getDescription());
-                        }
-                    }
-                });
+                showToast("mCamera == null?" + (mCamera == null));
+//                mCamera.setMode(SettingsDefinitions.CameraMode.SHOOT_PHOTO, new CommonCallbacks.CompletionCallback() {
+//                    @Override
+//                    public void onResult(DJIError djiError) {
+//                        if (djiError != null) {
+//                            showToast("can't change mode of camera, error:"+djiError.getDescription());
+//                        }
+//                    }
+//                });
 
                 if (demoType == DemoType.USE_SURFACE_VIEW_DEMO_DECODER) {
                     if (VideoFeeder.getInstance() != null) {

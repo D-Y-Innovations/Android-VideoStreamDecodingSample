@@ -313,14 +313,20 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
         }
     }
 
+    private boolean startup = true;
+
     private void refreshSDKRelativeUI() {
 
-        BaseProduct mProduct = VideoDecodingApplication.getProductInstance();
+        BaseProduct mProduct = DJISDKManager.getInstance().getProduct();
         Log.v(TAG, "refreshSDKRelativeUI");
 
         if (null != mProduct && mProduct.isConnected()) {
             Log.v(TAG, "refreshSDK: True");
             mBtnOpen.setEnabled(true);
+            if (startup) {
+                mBtnOpen.performClick();
+                this.startup = false;
+            }
 
             String str = mProduct instanceof Aircraft ? "DJIAircraft" : "DJIHandHeld";
             mTextConnectionStatus.setText("Status: " + str + " connected");

@@ -47,6 +47,13 @@ android {
         doNotStrip "*/*/libFR.so"
         exclude 'META-INF/rxjava.properties'
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 }
 dependencies {
     implementation 'com.android.support:multidex:1.0.2'
