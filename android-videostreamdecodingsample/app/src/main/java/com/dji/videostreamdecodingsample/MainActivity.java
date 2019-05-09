@@ -26,6 +26,7 @@ import dji.common.camera.SettingsDefinitions;
 import dji.common.error.DJIError;
 import dji.common.util.CommonCallbacks;
 import dji.log.DJILog;
+import dji.sdk.sdkmanager.DJISDKManager;
 import dji.thirdparty.afinal.core.AsyncTask;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,6 +40,8 @@ import dji.sdk.camera.Camera;
 import dji.sdk.camera.VideoFeeder;
 import dji.sdk.codec.DJICodecManager;
 import java.nio.ByteBuffer;
+
+import static android.os.SystemClock.sleep;
 
 public class MainActivity extends Activity implements DJICodecManager.YuvDataCallback {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -257,16 +260,45 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
             showToast("Disconnected");
         } else {
             if (!product.getModel().equals(Model.UNKNOWN_AIRCRAFT)) {
+                while (null == product.getCamera()) {
+                    sleep(500);
+                    Log.d(TAG, "mCamera == null");
+                }
                 mCamera = product.getCamera();
-                showToast("mCamera == null?" + (mCamera == null));
-//                mCamera.setMode(SettingsDefinitions.CameraMode.SHOOT_PHOTO, new CommonCallbacks.CompletionCallback() {
-//                    @Override
-//                    public void onResult(DJIError djiError) {
-//                        if (djiError != null) {
-//                            showToast("can't change mode of camera, error:"+djiError.getDescription());
-//                        }
-//                    }
-//                });
+                Log.i(TAG, "mCamera == null? " + (mCamera == null));
+                mCamera.setMode(SettingsDefinitions.CameraMode.SHOOT_PHOTO, new CommonCallbacks.CompletionCallback() {
+                    @Override
+                    public void onResult(DJIError djiError) {
+                        if (djiError != null) {
+                            Log.i(TAG, "can't change mode of camera, error: " + djiError.getDescription());
+                            showToast("can't change mode of camera, error:"+djiError.getDescription());
+                        }
+                    }
+                });
+                Thread thread = new Thread() {
+                    @Override
+                    public void run() {
+                        while(true) {
+                            try {
+                                mCamera.getMode(new CommonCallbacks.CompletionCallbackWith<SettingsDefinitions.CameraMode>() {
+                                    @Override
+                                    public void onSuccess(SettingsDefinitions.CameraMode cameraMode) {
+                                        Log.d(TAG, "SettingsDefinitions.CameraMode = " + cameraMode);
+                                    }
+
+                                    @Override
+                                    public void onFailure(DJIError djiError) {
+                                        Log.e(TAG, "mCamera.getMode " + djiError.getDescription());
+                                    }
+                                });
+                                sleep(5000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                };
+                thread.start();
 
                 if (demoType == DemoType.USE_SURFACE_VIEW_DEMO_DECODER) {
                     if (VideoFeeder.getInstance() != null) {
