@@ -35,6 +35,7 @@ import dji.log.DJILog;
 import dji.sdk.base.BaseComponent;
 import dji.sdk.base.BaseProduct;
 import dji.sdk.products.Aircraft;
+import dji.sdk.sdkmanager.DJISDKInitEvent;
 import dji.sdk.sdkmanager.DJISDKManager;
 import dji.sdk.useraccount.UserAccountManager;
 
@@ -152,6 +153,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
                                 });
                             }
                             notifyStatusChange();
+                        }
+                        @Override
+                        public void onInitProcess(DJISDKInitEvent event, int totalProcess) {
                         }
                     });
                 }

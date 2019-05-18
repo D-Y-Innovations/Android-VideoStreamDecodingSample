@@ -39,6 +39,7 @@ import dji.sdk.base.BaseProduct;
 import dji.sdk.camera.Camera;
 import dji.sdk.camera.VideoFeeder;
 import dji.sdk.codec.DJICodecManager;
+import dji.common.airlink.PhysicalSource;
 import java.nio.ByteBuffer;
 
 import static android.os.SystemClock.sleep;
@@ -213,7 +214,7 @@ public class MainActivity extends Activity implements DJICodecManager.YuvDataCal
 
             VideoFeeder.getInstance().addPhysicalSourceListener(new VideoFeeder.PhysicalSourceListener() {
                 @Override
-                public void onChange(VideoFeeder.VideoFeed videoFeed, VideoFeeder.PhysicalSource physicalSource) {
+                public void onChange(VideoFeeder.VideoFeed videoFeed, PhysicalSource physicalSource) {
                     showToast("VideoFeeder.PhysicalSource = " + physicalSource.toString());
                 }
             });
